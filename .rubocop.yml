@@ -2,6 +2,10 @@ AllCops:
   TargetRubyVersion: 2.6
   NewCops: enable
 
+require:
+  - rubocop-rake
+  - rubocop-rspec
+
 Style/Documentation:
   Enabled: false
 
@@ -26,3 +30,6 @@ Lint/MissingSuper:
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+
+RSpec/NestedGroups:
+  Enabled: false
