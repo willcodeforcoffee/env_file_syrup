@@ -29,5 +29,10 @@ module EnvFileSyrup
     def add_line(line)
       @lines << line
     end
+
+    def to_s
+      # Export the EnvFile as a valid .env file
+      "#{@lines.map(&:to_s).join("\n")}\n"
+    end
   end
 end

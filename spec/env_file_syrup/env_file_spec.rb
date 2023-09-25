@@ -14,11 +14,11 @@ RSpec.describe EnvFileSyrup::EnvFile do
     end
 
     it "returns an instance of EnvFile" do
-      expect(described_class.parse(valid_env_file)).to be_a(described_class)
+      expect(parsed_file).to be_a(described_class)
     end
 
     describe "the parsed file" do
-      subject(:data_at_line) { described_class.parse(valid_env_file).lines[line_number] }
+      subject(:data_at_line) { parsed_file.lines[line_number] }
 
       let(:line_number) { 0 }
 
@@ -96,6 +96,12 @@ RSpec.describe EnvFileSyrup::EnvFile do
         it "starts with the correct key/value and comment" do
           expect(data_at_line.to_s).to eq "KEY3=value3 # Comment on line 3"
         end
+      end
+    end
+
+    describe "#to_s" do
+      it "will output a sanitized version of the env file" do
+        expect(parsed_file.to_s).to eq valid_env_file
       end
     end
   end
