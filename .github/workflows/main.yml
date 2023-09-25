@@ -25,3 +25,7 @@ jobs:
         bundler-cache: true
     - name: Run the default task
       run: bundle exec rake
+    - name: Rubocop Linting
+      run: bundle exec rubocop
+    - name: Rspec Testing
+      run: bundle exec rspec spec/**/*_spec.rb
