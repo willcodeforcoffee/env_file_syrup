@@ -30,6 +30,18 @@ module EnvFileSyrup
       @lines << line
     end
 
+    def to_h
+      hash = {}
+
+      @lines.each do |line|
+        next unless line.is_a?(::EnvFileSyrup::Lines::KeyValueLine)
+
+        hash[line.key] = line.value
+      end
+
+      hash
+    end
+
     def to_s
       # Export the EnvFile as a valid .env file
       "#{@lines.map(&:to_s).join("\n")}\n"
