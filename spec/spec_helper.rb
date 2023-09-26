@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "env_file_syrup"
 
 RSpec.configure do |config|

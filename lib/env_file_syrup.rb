@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative "env_file_syrup/version"
 require_relative "env_file_syrup/env_file"
 

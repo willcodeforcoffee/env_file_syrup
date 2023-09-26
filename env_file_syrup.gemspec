@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative "lib/env_file_syrup/version"
 
 Gem::Specification.new do |spec|
