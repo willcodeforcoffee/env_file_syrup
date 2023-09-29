@@ -145,14 +145,14 @@ RSpec.describe EnvFileSyrup::EnvFile do
       expect { parsed_file.merge("failure") }.to raise_error(ArgumentError)
     end
 
-    context("when merging two different EnvFiles") do
+    context "when merging two different EnvFiles" do
       let(:primary_env_file) do
         <<~ENV_FILE
           # Env File 1
           KEY1=value1
           KEY2=value2 # Comment at end of line
 
-          # A section split content
+          # A section split and content
           KEY3=value3 # Comment on line 3
         ENV_FILE
       end
@@ -170,11 +170,52 @@ RSpec.describe EnvFileSyrup::EnvFile do
           KEY1=value1
           KEY2=value2 # Comment at end of line
 
-          # A section split content
+          # A section split and content
           KEY3=value3 # Comment on line 3
 
           # Env File 2
           KEY4=value4
+        ENV_FILE
+      end
+
+      it "will merge the two files" do
+        expect(merged_file.to_s).to eq expected_merged_file
+      end
+    end
+
+    context "when merging two similar EnvFiles" do
+      let(:primary_env_file) do
+        <<~ENV_FILE
+          # Env File 1
+          KEY1=first1 # no change comment
+          KEY2=first2 # Comment at end of line
+
+          # A section split and content
+          KEY3=first3 # Comment on line 3
+        ENV_FILE
+      end
+
+      let(:secondary_env_file) do
+        <<~ENV_FILE
+          KEY1=second1
+          KEY2=second2 # New comment too
+
+          # Env File 2
+          KEY4=second4
+        ENV_FILE
+      end
+
+      let(:expected_merged_file) do
+        <<~ENV_FILE
+          # Env File 1
+          KEY1=second1 # no change comment
+          KEY2=second2 # New comment too
+
+          # A section split and content
+          KEY3=first3 # Comment on line 3
+
+          # Env File 2
+          KEY4=second4
         ENV_FILE
       end
 

@@ -90,7 +90,7 @@ module EnvFileSyrup
         add_line(kv_line.clone)
         true
       else
-        key_value.merge(kv_line)
+        key_line.merge(kv_line)
         false
       end
     end
