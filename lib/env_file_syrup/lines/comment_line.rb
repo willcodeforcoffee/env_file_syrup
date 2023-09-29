@@ -7,6 +7,10 @@ module EnvFileSyrup
         @comment = comment.strip
       end
 
+      def clone
+        CommentLine.new(@comment)
+      end
+
       def to_s
         @comment
       end

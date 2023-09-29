@@ -11,6 +11,10 @@ module EnvFileSyrup
         @comment = comment&.strip
       end
 
+      def clone
+        KeyValueLine.new(@key, @value, @comment)
+      end
+
       def to_s
         return "#{@key}=#{@value} #{@comment}" if @comment
 
