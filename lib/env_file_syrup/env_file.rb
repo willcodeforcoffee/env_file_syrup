@@ -52,7 +52,7 @@ module EnvFileSyrup
 
     # Generate a hash of values based only on the key/value rows from the EnvFile
     def to_h
-      @lines.select { |line| line.key_value? }
+      @lines.select(&:key_value?)
             .to_h { |line| [line.key, line.value] }
     end
 
@@ -88,11 +88,10 @@ module EnvFileSyrup
       key_line = @lines.select { |l| l.key_value? && l.key == kv_line.key }[0]
       if key_line.nil?
         add_line(kv_line.clone)
-        false
-      else
-        key_value.value = kv_line.value
-        key_value.comment = kv_line.comment unless kv_line.comment.nil?
         true
+      else
+        key_value.merge(kv_line)
+        false
       end
     end
   end

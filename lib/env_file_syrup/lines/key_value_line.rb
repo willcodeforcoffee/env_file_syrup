@@ -15,6 +15,13 @@ module EnvFileSyrup
         KeyValueLine.new(@key, @value, @comment)
       end
 
+      def merge(other_line)
+        @value = other_line.value
+        @comment = other_line.comment if other_line.comment
+
+        self
+      end
+
       def to_s
         return "#{@key}=#{@value} #{@comment}" if @comment
 
