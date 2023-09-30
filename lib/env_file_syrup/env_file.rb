@@ -31,16 +31,16 @@ module EnvFileSyrup
     end
 
     # Merge another EnvFile into this one and generate a new EnvFile with the results
-    def merge(other_env_file)
-      unless other_env_file.is_a?(::EnvFileSyrup::EnvFile)
+    def merge(with_env_file)
+      unless with_env_file.is_a?(::EnvFileSyrup::EnvFile)
         raise ArgumentError,
-              "other_env_file must be an instance of EnvFile"
+              "argument must be an instance of EnvFile"
       end
 
       merged_file = EnvFile.new
 
       merged_file.send(:add_cloned_lines, @lines)
-      merged_file.send(:merge_lines_with, other_env_file.lines)
+      merged_file.send(:merge_lines_with, with_env_file.lines)
 
       merged_file
     end
